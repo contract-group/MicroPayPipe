@@ -1,8 +1,0 @@
-{
-	"host":"127.0.0.1",
-	"port":22,
-	"user":"root",
-	"dest":"/data/dest",
-	"wwwDest":"/data/www",
-	"privateKey":"vultr_nbs"
-}
