@@ -1,0 +1,22 @@
+{
+	"port": 6004,
+	"bind": "localhost",
+	"files": ["./public/**/*.{html,htm,css,js}"],
+	"index": "mining-pool-home.html",
+	"server": [
+		"./build",
+		"./public",
+		"./data"
+	],
+	"watchexps"	: [
+		"public/**.js # # reload",
+		"src/** # echo wow! # reload",
+		"public/**.css # # reloadcss",
+		"public/**.html # # reload"
+	],
+	"interval" 	: 500,
+	"delay"		: 1000,
+	"quiet" 	: false,
+	"open"		: true,
+	"http2"		: false
+}

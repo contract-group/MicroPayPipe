@@ -1,0 +1,34 @@
+{
+  "name": "micropaypipe",
+  "version": "0.0.1",
+  "description": "smart contract base on ethereum",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@naruto:contract-group/MicroPayPipe.git"
+  },
+  "keywords": [
+    "pay"
+  ],
+  "author": "naruto",
+  "license": "MIT",
+  "dependencies": {
+    "fast-date-format": "^2.2.3",
+    "jquery": "^3.4.1",
+    "web3": "^1.2.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4",
+    "shelljs": "^0.8.3",
+    "bestzip": "^2.1.4",
+    "browserify": "^16.5.0",
+    "browserify-shim": "^3.8.14",
+    "watchify": "^3.11.1"
+  }
+}
