@@ -2,11 +2,12 @@
   "name": "micropaypipe",
   "version": "0.0.1",
   "description": "smart contract base on ethereum",
-  "main": "index.js",
+  "main": "truffle.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
+    "deploy":"truffle migrate --network development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,11 +25,12 @@
     "web3": "^1.2.1"
   },
   "devDependencies": {
-    "lite-server": "^2.5.4",
-    "shelljs": "^0.8.3",
     "bestzip": "^2.1.4",
     "browserify": "^16.5.0",
     "browserify-shim": "^3.8.14",
+    "dotenv": "^8.1.0",
+    "lite-server": "^2.5.4",
+    "shelljs": "^0.8.3",
     "watchify": "^3.11.1"
   }
 }

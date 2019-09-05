@@ -2,7 +2,7 @@ pragma solidity >=0.4.24;
 
 
 import "./IERC20.sol";
-import "./safemath.sol";
+import "./SafeMath.sol";
 
 /**
  * The ERC20 contract does this and that...
@@ -52,14 +52,14 @@ contract ERC20 is IERC20 {
 	 */
 	function transfer(address to,uint256 amount)public returns (bool){
 
-		require (value <= _balances[msg.sender]);
+		require (amount <= _balances[msg.sender]);
 
 		require (to != address(0));
 		
 		_balances[msg.sender] = _balances[msg.sender].sub(amount);
-		_balances[to] = _balances[to].add(value);
+		_balances[to] = _balances[to].add(amount);
 
-		emit Transfer(msg.sender,to,value);
+		emit Transfer(msg.sender,to,amount);
 		return true;
 	}
 
@@ -102,7 +102,7 @@ contract ERC20 is IERC20 {
 
 		_allowed[msg.sender][spender] = amount;
 
-		emit Approve(msg.sender,spender,value);
+		emit Approve(msg.sender,spender,amount);
 		return true;
 	}
 
@@ -122,14 +122,14 @@ contract ERC20 is IERC20 {
 		_allowed[msg.sender][spender] = (
 			_allowed[msg.sender][spender].add(addedValue));
 		
-		emit Approval(msg.sender,spender,_allowed[msg.sender][spender]);
+		emit Approve(msg.sender,spender,_allowed[msg.sender][spender]);
 		return true;
 	}
 
 	/**
-	 * @dev
-	 * @param 	spender
-	 * @param	subtractedValue
+	 * @dev 	decrease Allowance
+	 * @param 	spender address 
+	 * @param	subtractedValue uint256
 	 *
 	 */
 	function decreaseAllowance(address spender,uint256 subtractedValue)
@@ -139,7 +139,7 @@ contract ERC20 is IERC20 {
 
 		_allowed[msg.sender][spender] = (_allowed[msg.sender][spender].sub(subtractedValue));
 
-		emit Approval(msg.sender,spender,_allowed[msg.sender][spender]);
+		emit Approve(msg.sender,spender,_allowed[msg.sender][spender]);
 		return true;
 	}
 
