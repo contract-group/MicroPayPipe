@@ -222,7 +222,7 @@
         "type": "function"
       }
     ],
-    "address": "0x50F8e1fA8e7565858c818c001940C68818aBEBF3"
+    "address": "0xd6B33FA21A66aD65b9c5AA9976b6FF157Af9879b"
   },
   "IERC20": {
     "contractName": "IERC20",
@@ -875,7 +875,7 @@
         "type": "function"
       }
     ],
-    "address": "0x01e4c2ac364a6e8d5704758fbC905A0D8fDBC3a9"
+    "address": "0x5bEC44faf0E46b8Ee20d0A94f37fCFDd1AE8c712"
   },
   "Migrations": {
     "contractName": "Migrations",
@@ -943,7 +943,7 @@
         "type": "function"
       }
     ],
-    "address": "0xE10eb52714480084D3a1D78089E24BC558001fC4"
+    "address": "0xE7f1bFF3a48AF1180369f19dB50D900DE30f8e7d"
   },
   "Owned": {
     "contractName": "Owned",
@@ -983,12 +983,12 @@
         "type": "function"
       }
     ],
-    "address": "0x14C8D892AdDB026B747Ed60C38e7bb000468BCac"
+    "address": "0x4F794369b1A945c23523BC586B3F8712C0C5c99d"
   },
   "SafeMath": {
     "contractName": "SafeMath",
     "abi": [],
-    "address": "0x672A0D0dF44eCc310a158aecA86582Bd89FfF196"
+    "address": "0x338fBCac25E72d8aAECd8254569E5047847F8401"
   },
   "TCoinToken": {
     "contractName": "TCoinToken",
@@ -1289,6 +1289,6 @@
         "type": "function"
       }
     ],
-    "address": "0x8545d7D7e67EC065aec19A073329f1F768733D9b"
+    "address": "0xa740C4F5158b60D480844d95eb5153BFb47f8b37"
   }
 }

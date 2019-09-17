@@ -2,47 +2,74 @@
  * MetaMask Support
  *  |\_/|,,_____,~~`
  *  (.".)~~     )`~}}
- *	 \o/\ /---~\\ ~}}
+ *   \o/\ /---~\\ ~}}
  *     _//    _// ~}
  * 
- * Copyright (c) 2019 PPL,pangolin-team
- * E-mail : developer-team@pangolink.org
- * https://github.com/pangolin-lab/web3js-sdk
+ * Copyright (c) 2019 naruto,developer-team
+ * E-mail : developer-team@gmail.com
+ * https://github.com/jnaruto/MicroPayPipe
  *
  */
 "use strict";
-const DEF_CONTRACTS_SRC = "build/contracts";
-const DEF_TARGET_SRC = "data";
+const DEF_CONTRACTS_SRC = ".output";
+const DEF_TARGET_SRC = "data/abis";
 const DEF_TARGET_ABI = "core-abi.json";
+const FILTER_TRUFFLE = "Migrations.json";
+
 
 var fs = require('fs');
 var path = require('path');
 var sh = require('shelljs');
 
+const DEF = {
+  abiSrc:"build/contracts",
+  targetDest:"data/abis",
+  targetABI:"core-abi.json"
+};
+
 class AbiHandler {
   
+  /**
+   * options string set abiSrc
+   * options object Json
+   *
+   */
   constructor (options) {
-  	this.ROOT_HOME = process.cwd();
-  	this.ctx ={};
-  	if(typeof options === 'string'){
-  	  this.ctx['abiSrc'] = _getABISource(options);
-  	}
+    this.version = '0.0.5';
+    this.ROOT_HOME = process.cwd();
+    this.ctx =Object.assign({},DEF);
 
-  	if(!fs.existsSync(this.ctx['abiSrc'])){
-  	  console.log("Contracts:"+this.ctx['abiSrc']);
-  	  console.log("contracts abi directory not exists."+process.cwd());
-  	  //process.exit(1);
-  	}
-    if(!fs.existsSync(DEF_TARGET_SRC)){
-      sh.mkdir('-p',DEF_TARGET_SRC);
+    if(typeof options === 'string'){
+      _setABISrc(this.ctx,options);
+    }else if(typeof options === 'object'){
+      if(typeof options.abiSrc === 'string')
+        _setABISrc(this.ctx,options.abiSrc);
+
+      if(typeof options.targetDest ==='string')
+        _setTargetDest(this.ctx,options.targetDest);
+
+      if(typeof options.targetABI ==='string')
+        _setTargetABI(this.ctx,options.targetABI);
+    }else{
+      console.log('options invalid,initial instance used default.');
     }
 
-  	this.ctx['coreabi'] = path.join(DEF_TARGET_SRC,DEF_TARGET_ABI);
+    if(!fs.existsSync(this.ctx.abiSrc)){
+      console.log("Contracts:"+this.ctx['abiSrc']);
+      console.log("contracts abi directory not exists."+
+        path.join(process.cwd(),this.ctx.abiSrc));
+      //process.exit(1);
+    }
+    if(!fs.existsSync(this.ctx.targetDest)){
+      sh.mkdir('-p',this.ctx.targetDest);
+    }
+    this.ctx['coreabi'] = path.join(this.ctx.targetDest,this.ctx.targetABI);
+
   }
 
   generatorABI(cover){
-  	let isCover = typeof cover === 'bool' ? cover : true;
-  	console.log("overwrite>>"+ isCover);
+    let isCover = typeof cover === 'bool' ? cover : true;
+    console.log("overwrite>>"+ isCover);
     let rs = _loadABIFiles(path.join(this.ROOT_HOME,this.ctx['abiSrc']))
     let coreABIs = {};
     for(var i=0,len = rs.length;i<len;i++){
@@ -63,27 +90,40 @@ class AbiHandler {
       }
     }
 
-    //console.log(JSON.stringify(coreABIs,null,'  '));
     fs.writeFile(this.ctx['coreabi'],JSON.stringify(coreABIs,null,'  '),err=>{
       if(err)console.log(err);
     });
   }
 
   getCtx(){
-  	return this.ctx;
+    return this.ctx;
   }
 }
 
-/**
- *
- */
-function _getABISource(p){
-  return p == null ?  DEF_CONTRACTS_SRC : p;
+function _setABISrc(ctx,src){
+  if(src.trim().length >0){
+    ctx.abiSrc = src.trim();
+  }
 }
+
+function _setTargetDest(ctx,dest){
+  if(typeof dest ==='string' && dest.trim()>0){
+    ctx.targetDest = dest.trim();
+  }
+}
+
+function _setTargetABI(ctx,target){
+  if(typeof target ==='string' && target.endsWith('.json')){
+    ctx.targetABI = target;
+  }
+}
+
+
 
 function _loadABIFiles(p){
   return fs
-    .readdirSync(p).filter(fileName => fileName.indexOf('.json') !==-1 )
+    .readdirSync(p).filter(
+      fileName => (fileName.indexOf('.json') !==-1 && fileName != FILTER_TRUFFLE) )
     .map(fileName=>[
       JSON.parse( fs.readFileSync(path.join(p,fileName)))
     ]);

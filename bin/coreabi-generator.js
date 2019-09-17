@@ -11,5 +11,10 @@
  *
  */
 const AbiHandler = require('../src/lib/utils/abihandler.js');
-var abiHandler = new AbiHandler('build/contracts');
-abiHandler.generatorABI('true');
+let options = {
+	abiSrc:".abis/coin",
+	targetDest:"data/abis"
+};
+var abiHandler = new AbiHandler(options);
+
+abiHandler.generatorABI(true);
