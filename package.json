@@ -26,7 +26,7 @@
   "devDependencies": {
     "lite-server": "^2.5.4",
     "shelljs": "^0.8.3",
-    "bestzip": "^2.1.4",
+    "bestzip": "^2.1.7",
     "browserify": "^16.5.0",
     "browserify-shim": "^3.8.14",
     "watchify": "^3.11.1"
